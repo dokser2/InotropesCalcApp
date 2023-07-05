@@ -53,7 +53,7 @@ fun SeringeVolume(currentSeringeStatus: String, onVolumeSelected: (String) -> Un
         ) {
             Text(
                 text = "20 мл",
-                style = TextStyle(color = Color.Black, fontSize = 18.sp),
+                style = TextStyle(color = Color.Blue, fontSize = 18.sp),
                 textAlign = TextAlign.Center, fontWeight = FontWeight.Bold
             )
 
@@ -72,7 +72,7 @@ fun SeringeVolume(currentSeringeStatus: String, onVolumeSelected: (String) -> Un
         ) {
             Text(
                 text = "50 мл",
-                style = TextStyle(color = Color.Black, fontSize = 18.sp),
+                style = TextStyle(color = Color.Blue, fontSize = 18.sp),
                 textAlign = TextAlign.Center, fontWeight = FontWeight.Bold
             )
             RadioButton(selected = is50Selected, onClick = {

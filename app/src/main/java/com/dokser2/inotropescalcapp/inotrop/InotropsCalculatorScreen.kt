@@ -21,9 +21,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,22 +32,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.dokser2.inotropescalcapp.R
 import com.dokser2.inotropescalcapp.inotrop.components.InputField
 import com.dokser2.inotropescalcapp.inotrop.components.SeringeVolume
+import com.dokser2.inotropescalcapp.ui.theme.Whitish
 
 const val InotropsCalculatorScreenNavigationId = "intorops_screen"
 
 @Composable
 fun InotropsCalculatorScreen() {
     val viewModel: FormulaViewModel = viewModel()
-
-    Image(
-        painter = painterResource(id = R.drawable.baby),
-        contentDescription = "img",
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.FillBounds
-    )
     Body(viewModel = viewModel)
 }
 
@@ -60,6 +54,8 @@ fun Body(viewModel: FormulaViewModel) {
     var infussionSpeed by remember { mutableStateOf("") }
     var syringeVolume by remember { mutableStateOf("") }
     var result_string: String by remember { mutableStateOf("") }
+
+    val boxSize = with(LocalDensity.current) { 300.dp.toPx() }
 
     val isButtonActive by remember {
         derivedStateOf {
@@ -76,6 +72,13 @@ fun Body(viewModel: FormulaViewModel) {
         modifier = Modifier
             .fillMaxSize()
             .padding(5.dp)
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color.Blue.copy(alpha = 0.5f), Whitish),
+                    start = Offset(0f, 0f), // top left corner
+                    end = Offset(boxSize, boxSize) // bottom right corner
+                )
+            )
             .verticalScroll(ScrollState(0)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
